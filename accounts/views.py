@@ -38,7 +38,14 @@ def login(request):
         if not user.check_password(password):
             return JsonResponse({'error': 'Incorrect password.'}, status=400)
         
-        return JsonResponse({'message': 'User login successfully.'}, status=201)
+        user_data = {
+            'id': user.id,
+            'username': user.username,
+            # Include other fields as needed
+        }
+        
+        return JsonResponse({'message': 'User logged in successfully.', 'data': user_data}, status=200)
+
     else:
         return JsonResponse({'error': 'Method not allowed.'}, status=405)
     
