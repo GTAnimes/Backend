@@ -6,7 +6,9 @@ class User(models.Model):
     id = models.BigAutoField(primary_key=True)
     username = models.CharField(max_length=100, unique=True)
     password = models.CharField(max_length=100)
-    salt = models.CharField(max_length=32, null=True)  # Assuming 32 characters for salt
+    email = models.CharField(max_length=255, unique=True, null=True)
+    salt = models.CharField(max_length=32)  # Assuming 32 characters for salt
+    points = models.IntegerField(default=0)  # Points field with an initial value of 0
 
     @staticmethod
     def generate_salt():
